@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorteador de Agentes do Desgraçacraft (A pedido do gay do erick) </title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f1923, #1d2731);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    h1 {
+      margin-top: 0;
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .subtitulo {
+      text-align: center;
+      color: #c8d0d8;
+      margin-bottom: 30px;
+    }
+
+    .painel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .bloco {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      font-size: 16px;
+    }
+
+    select {
+      margin-bottom: 15px;
+    }
+
+    button {
+      background: #ff4655;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.02);
+      background: #e33c4a;
+    }
+
+    .resultado-card {
+      text-align: center;
+    }
+
+    .resultado-imagem {
+      width: 100%;
+      max-width: 280px;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+      margin: 0 auto 15px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nome-agente {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .classe-agente {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .mensagem {
+      color: #d0d7de;
+      font-size: 15px;
+    }
+
+    .duelista {
+      background: rgba(255, 70, 85, 0.2);
+      color: #ff7d88;
+    }
+
+    .controlador {
+      background: rgba(108, 92, 231, 0.2);
+      color: #b8a8ff;
+    }
+
+    .iniciador {
+      background: rgba(0, 184, 148, 0.2);
+      color: #7ff1cd;
+    }
+
+    .sentinela {
+      background: rgba(241, 196, 15, 0.2);
+      color: #ffe27a;
+    }
+
+    @media (max-width: 768px) {
+      .painel {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sorteador de Agentes do Desgraçacraft (A pedido do gay do erick)</h1>
+    <p class="subtitulo">Escolha uma classe e sorteie um agente.</p>
+
+    <div class="painel">
+      <div class="bloco">
+        <label for="classe">Escolha a classe</label>
+        <select id="classe">
+          <option value="todos">Todos</option>
+          <option value="duelista">Duelista</option>
+          <option value="controlador">Controlador</option>
+          <option value="iniciador">Iniciador</option>
+          <option value="sentinela">Sentinela</option>
+        </select>
+
+        <button onclick="sortearAgente()">Sortear agente</button>
+      </div>
+
+      <div class="bloco resultado-card">
+        <img
+          id="imagemAgente"
+          class="resultado-imagem"
+          src="img/jett.png"
+          alt="Agente sorteado"
+        >
+
+        <div id="nomeAgente" class="nome-agente">Jett</div>
+        <div id="classeAgente" class="classe-agente duelista">Duelista</div>
+        <div class="mensagem" id="mensagemAgente">Clique em sortear para escolher um agente.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const agentes = [
+      { nome: "Astra", classe: "controlador", foto: "img/astra.png" },
+      { nome: "Breach", classe: "iniciador", foto: "img/breach.png" },
+      { nome: "Brimstone", classe: "controlador", foto: "img/brimstone.png" },
+      { nome: "Chamber", classe: "sentinela", foto: "img/chamber.png" },
+      { nome: "Clove", classe: "controlador", foto: "img/clove.png" },
+      { nome: "Cypher", classe: "sentinela", foto: "img/cypher.png" },
+      { nome: "Deadlock", classe: "sentinela", foto: "img/deadlock.png" },
+      { nome: "Fade", classe: "iniciador", foto: "img/fade.png" },
+      { nome: "Gekko", classe: "iniciador", foto: "img/gekko.png" },
+      { nome: "Harbor", classe: "controlador", foto: "img/harbor.png" },
+      { nome: "Iso", classe: "duelista", foto: "img/iso.png" },
+      { nome: "Jett", classe: "duelista", foto: "img/jett.png" },
+      { nome: "KAY/O", classe: "iniciador", foto: "img/kayo.png" },
+      { nome: "Killjoy", classe: "sentinela", foto: "img/killjoy.png" },
+      { nome: "Miks", classe: "controlador", foto: "img/miks.png" },
+      { nome: "Neon", classe: "duelista", foto: "img/neon.png" },
+      { nome: "Omen", classe: "controlador", foto: "img/omen.png" },
+      { nome: "Phoenix", classe: "duelista", foto: "img/phoenix.png" },
+      { nome: "Raze", classe: "duelista", foto: "img/raze.png" },
+      { nome: "Reyna", classe: "duelista", foto: "img/reyna.png" },
+      { nome: "Sage", classe: "sentinela", foto: "img/sage.png" },
+      { nome: "Skye", classe: "iniciador", foto: "img/skye.png" },
+      { nome: "Sova", classe: "iniciador", foto: "img/sova.png" },
+      { nome: "Tejo", classe: "iniciador", foto: "img/tejo.png" },
+      { nome: "Veto", classe: "sentinela", foto: "img/veto.png" },
+      { nome: "Viper", classe: "controlador", foto: "img/viper.png" },
+      { nome: "Vyse", classe: "sentinela", foto: "img/vyse.png" },
+      { nome: "Waylay", classe: "duelista", foto: "img/waylay.png" },
+      { nome: "Yoru", classe: "duelista", foto: "img/yoru.png" }
+    ];
+
+    function formatarClasse(classe) {
+      if (classe === "duelista") return "Duelista";
+      if (classe === "controlador") return "Controlador";
+      if (classe === "iniciador") return "Iniciador";
+      return "Sentinela";
+    }
+
+    function sortearAgente() {
+      const classeSelecionada = document.getElementById("classe").value;
+
+      let agentesFiltrados;
+
+      if (classeSelecionada === "todos") {
+        agentesFiltrados = agentes;
+      } else {
+        agentesFiltrados = agentes.filter(function(agente) {
+          return agente.classe === classeSelecionada;
+        });
+      }
+
+      const indiceSorteado = Math.floor(Math.random() * agentesFiltrados.length);
+      const agenteSorteado = agentesFiltrados[indiceSorteado];
+
+      const imagem = document.getElementById("imagemAgente");
+      const nome = document.getElementById("nomeAgente");
+      const classe = document.getElementById("classeAgente");
+      const mensagem = document.getElementById("mensagemAgente");
+
+      imagem.src = agenteSorteado.foto;
+      imagem.alt = agenteSorteado.nome;
+
+      nome.textContent = agenteSorteado.nome;
+      classe.textContent = formatarClasse(agenteSorteado.classe);
+      classe.className = "classe-agente " + agenteSorteado.classe;
+
+      mensagem.textContent = "Seu agente sorteado está pronto.";
+    }
+  </script>
+</body>
+</html>
